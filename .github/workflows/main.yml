@@ -18,7 +18,12 @@ jobs:
         channel: 'stable'
         architecture: x64
     - run: flutter pub get
-    - run: flutter build ios --release
+    - run: flutter build ios --release --no-codesign
+    - run: mkdir /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload
+    - run: cp /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Runner.app /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload/
+    - run: cd /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/
+    - run: zip -r PayLoad.zip PayLoad.zip
+    - run: mv PayLoad.zip WeatherApp.ipa
     - id: flutter-action
       uses: subosito/flutter-action@v2
       with:
@@ -30,6 +35,10 @@ jobs:
         echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
         echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
       shell: bash
+    - uses: actions/upload-artifact@v3
+      with:
+        name: WeatherApp.ipa
+        path: /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/WeatherApp.ipa
 
   android:
     name: Build android application
@@ -46,7 +55,7 @@ jobs:
         channel: 'stable'
         architecture: x64
     - run: flutter pub get
-    - run: flutter build apk
+    - run: flutter build apk --split-per-abi
     - run: flutter build appbundle
     - id: flutter-action
       uses: subosito/flutter-action@v2
