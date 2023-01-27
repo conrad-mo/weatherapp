@@ -20,9 +20,9 @@ jobs:
     - run: flutter pub get
     - run: flutter build ios --release --no-codesign
     - run: mkdir /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload
-    - run: cp /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Runner.app /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload/
+    - run: cp -r /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Runner.app /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload/
     - run: cd /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/
-    - run: zip -r PayLoad.zip PayLoad.zip
+    - run: zip -r PayLoad.zip PayLoad
     - run: mv PayLoad.zip WeatherApp.ipa
     - id: flutter-action
       uses: subosito/flutter-action@v2
