@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   ios:
@@ -46,6 +47,7 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
         release: "Nightly iOS Release"
         tag: "nightly"
+        prerelease: true
         replace: true
         files: >
           /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/WeatherApp.ipa
