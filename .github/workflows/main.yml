@@ -7,8 +7,32 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-    name: Build mobile application
+  ios:
+    name: Build iOS application
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        architecture: x64
+    - run: flutter pub get
+    - run: flutter build ios --release --no-codesign
+    - id: flutter-action
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    - run: |
+        echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
+        echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
+        echo CHANNEL=${{ steps.flutter-action.outputs.CHANNEL }}
+        echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
+        echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
+      shell: bash
+
+  android:
+    name: Build android application
     runs-on: macos-latest
 
     steps:
@@ -17,12 +41,6 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
-    - uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-        architecture: x64
-    - run: flutter pub get
-    - run: flutter build ios --release --no-codesign
     - uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
@@ -41,4 +59,3 @@ jobs:
         echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
         echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
       shell: bash
-    
