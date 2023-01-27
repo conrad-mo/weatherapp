@@ -9,6 +9,7 @@ on:
 
 jobs:
   ios:
+    permissions: write-all
     name: Build iOS application
     runs-on: macos-latest
 
