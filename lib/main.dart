@@ -21,7 +21,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Pog'),
+        child: Text('Weather:'),
       ),
     );
   }
@@ -39,7 +39,7 @@ class _UvScreenState extends State<UvScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('POG'),
+        child: Text('Locations:'),
       ),
     );
   }
