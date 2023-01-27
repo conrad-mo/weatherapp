@@ -12,8 +12,35 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: WeatherBBar(),
         ),
+      ),
+    );
+  }
+}
+
+class WeatherBBar extends StatefulWidget {
+  const WeatherBBar({super.key});
+
+  @override
+  State<WeatherBBar> createState() => _WeatherBBarState();
+}
+
+class _WeatherBBarState extends State<WeatherBBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sunny),
+            label: 'UV Index',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'Weather',
+          ),
+        ],
       ),
     );
   }
