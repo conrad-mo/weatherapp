@@ -26,8 +26,8 @@ jobs:
         cp -r /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Runner.app /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload/
         cd /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/
         ls -a
-        zip -r PayLoad.zip PayLoad
-        mv PayLoad.zip WeatherApp.ipa
+        zip -r Payload.zip Payload
+        mv Payload.zip WeatherApp.ipa
     - id: flutter-action
       uses: subosito/flutter-action@v2
       with:
