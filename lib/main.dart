@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    title: 'Weather App',
-    home: Scaffold(
-      body: WeatherBBar(),
-    ),
-  ));
+  runApp(WeatherApp());
+}
+
+class WeatherApp extends StatefulWidget {
+  const WeatherApp({super.key});
+
+  @override
+  State<WeatherApp> createState() => _WeatherAppState();
+}
+
+class _WeatherAppState extends State<WeatherApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Weather App',
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
+      home: Scaffold(
+        body: WeatherBBar(),
+      ),
+    );
+  }
 }
 
 class WeatherScreen extends StatefulWidget {
@@ -20,9 +37,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Weather:'),
-      ),
+      body: Center(child: SafeArea(child: Text('Weather:'))
+          //child: Text('Weather:'),
+          ),
     );
   }
 }
@@ -35,11 +52,28 @@ class UvScreen extends StatefulWidget {
 }
 
 class _UvScreenState extends State<UvScreen> {
+  final locationlist = <String>["Markham", "Scarborough"];
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Locations:'),
+    return Scaffold(
+      body: SafeArea(
+        child: GridView.count(
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          children: [
+            Card(
+              color: Colors.blue[300],
+              child: Text(locationlist[0]),
+            ),
+            Card(
+              color: Colors.blue[300],
+              child: Text(locationlist[1]),
+            ),
+          ],
+        ),
+        //child: Text('Locations:'),
       ),
     );
   }
@@ -58,16 +92,18 @@ class _WeatherBBarState extends State<WeatherBBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        enableFeedback: true,
+        fixedColor: Colors.blue,
         currentIndex: _currentIndex,
         onTap: _onTabItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.sunny),
-            label: 'Home',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
-            label: 'Location',
+            label: '',
           ),
         ],
       ),
