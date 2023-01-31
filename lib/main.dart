@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(WeatherApp());
+  runApp(const WeatherApp());
 }
 
 class WeatherApp extends StatefulWidget {
@@ -19,7 +19,7 @@ class _WeatherAppState extends State<WeatherApp> {
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: Scaffold(
+      home: const Scaffold(
         body: LocationDrawer(),
       ),
     );
@@ -89,7 +89,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
                 child: Text('Locations:'),
               ),
             ),
-            Container(
+            SizedBox(
               height: double.maxFinite,
               child: ListView.builder(
                 itemCount: locationlist.length,
@@ -101,7 +101,6 @@ class _LocationDrawerState extends State<LocationDrawer> {
                       setState(() {
                         currentIndex = index;
                         currentlocation = locationlist[index];
-                        print(index);
                       });
                       // Update the state of the app.
                       // ...
