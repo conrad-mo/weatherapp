@@ -20,7 +20,7 @@ class _WeatherAppState extends State<WeatherApp> {
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       home: Scaffold(
-        body: WeatherBBar(),
+        body: LocationDrawer(),
       ),
     );
   }
@@ -52,74 +52,65 @@ class UvScreen extends StatefulWidget {
 }
 
 class _UvScreenState extends State<UvScreen> {
-  final locationlist = <String>["Markham", "Scarborough"];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: GridView.count(
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: [
-            Card(
-              color: Colors.blue[300],
-              child: Text(locationlist[0]),
-            ),
-            Card(
-              color: Colors.blue[300],
-              child: Text(locationlist[1]),
-            ),
-          ],
-        ),
+        child: Text("Hello"),
         //child: Text('Locations:'),
       ),
     );
   }
 }
 
-class WeatherBBar extends StatefulWidget {
-  const WeatherBBar({super.key});
+class LocationDrawer extends StatefulWidget {
+  const LocationDrawer({super.key});
 
   @override
-  State<WeatherBBar> createState() => _WeatherBBarState();
+  State<LocationDrawer> createState() => _LocationDrawerState();
 }
 
-class _WeatherBBarState extends State<WeatherBBar> {
-  int _currentIndex = 0;
+class _LocationDrawerState extends State<LocationDrawer> {
+  final locationlist = <String>["Markham", "Scarborough"];
+  String currentlocation = '';
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        enableFeedback: true,
-        fixedColor: Colors.blue,
-        currentIndex: _currentIndex,
-        onTap: _onTabItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.sunny),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: '',
-          ),
-        ],
-      ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: const [
-          WeatherScreen(),
-          UvScreen(),
-        ],
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Locations:'),
+            ),
+            Container(
+              height: double.maxFinite,
+              child: ListView.builder(
+                itemCount: locationlist.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(locationlist[index]),
+                    onTap: () {
+                      Navigator.pop(context);
+                      setState(() {
+                        currentIndex = index;
+                        currentlocation = locationlist[index];
+                        print(index);
+                      });
+                      // Update the state of the app.
+                      // ...
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  void _onTabItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }
