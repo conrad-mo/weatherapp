@@ -26,40 +26,36 @@ class _WeatherAppState extends State<WeatherApp> {
   }
 }
 
-class WeatherScreen extends StatefulWidget {
-  const WeatherScreen({super.key});
+class LocationOne extends StatefulWidget {
+  const LocationOne({super.key});
 
   @override
-  State<WeatherScreen> createState() => _WeatherScreenState();
+  State<LocationOne> createState() => _LocationOneState();
 }
 
-class _WeatherScreenState extends State<WeatherScreen> {
+class _LocationOneState extends State<LocationOne> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: SafeArea(child: Text('Weather:'))
+      body: Center(child: SafeArea(child: Text('Weather: Markham'))
           //child: Text('Weather:'),
           ),
     );
   }
 }
 
-class UvScreen extends StatefulWidget {
-  const UvScreen({super.key});
+class LocationTwo extends StatefulWidget {
+  const LocationTwo({super.key});
 
   @override
-  State<UvScreen> createState() => _UvScreenState();
+  State<LocationTwo> createState() => _LocationTwoState();
 }
 
-class _UvScreenState extends State<UvScreen> {
+class _LocationTwoState extends State<LocationTwo> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        child: Text("Hello"),
-        //child: Text('Locations:'),
-      ),
-    );
+        body: Center(child: SafeArea(child: Text('Weather: Scarborough'))));
   }
 }
 
@@ -77,15 +73,21 @@ class _LocationDrawerState extends State<LocationDrawer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Weather App'),
+        backgroundColor: Colors.blue,
+      ),
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+            const SizedBox(
+              height: 64.0,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Locations:'),
               ),
-              child: Text('Locations:'),
             ),
             Container(
               height: double.maxFinite,
@@ -110,6 +112,13 @@ class _LocationDrawerState extends State<LocationDrawer> {
             ),
           ],
         ),
+      ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: const [
+          LocationOne(),
+          LocationTwo(),
+        ],
       ),
     );
   }
