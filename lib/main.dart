@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globalvars.dart' as globals;
 
 void main() {
   runApp(const WeatherApp());
@@ -26,18 +27,19 @@ class _WeatherAppState extends State<WeatherApp> {
   }
 }
 
-class LocationOne extends StatefulWidget {
-  const LocationOne({super.key});
+class WeatherHome extends StatefulWidget {
+  const WeatherHome({super.key});
 
   @override
-  State<LocationOne> createState() => _LocationOneState();
+  State<WeatherHome> createState() => _WeatherHomeState();
 }
 
-class _LocationOneState extends State<LocationOne> {
+class _WeatherHomeState extends State<WeatherHome> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: SafeArea(child: Text('Weather: Markham'))
+    return Scaffold(
+      body: Center(
+          child: SafeArea(child: Text('Weather: ${globals.currentlocation}'))
           //child: Text('Weather:'),
           ),
     );
@@ -67,15 +69,23 @@ class LocationDrawer extends StatefulWidget {
 }
 
 class _LocationDrawerState extends State<LocationDrawer> {
-  final locationlist = <String>["Markham", "Scarborough"];
-  String currentlocation = '';
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Weather App'),
         backgroundColor: Colors.blue,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Add new location',
+            onPressed: () {
+              setState(() {
+                globals.locationlist.add('place');
+              });
+            },
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -92,15 +102,15 @@ class _LocationDrawerState extends State<LocationDrawer> {
             SizedBox(
               height: double.maxFinite,
               child: ListView.builder(
-                itemCount: locationlist.length,
+                itemCount: globals.locationlist.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(locationlist[index]),
+                    title: Text(globals.locationlist[index]),
                     onTap: () {
                       Navigator.pop(context);
                       setState(() {
-                        currentIndex = index;
-                        currentlocation = locationlist[index];
+                        //globals.currentIndex = index;
+                        globals.currentlocation = globals.locationlist[index];
                       });
                       // Update the state of the app.
                       // ...
@@ -113,10 +123,10 @@ class _LocationDrawerState extends State<LocationDrawer> {
         ),
       ),
       body: IndexedStack(
-        index: currentIndex,
-        children: const [
-          LocationOne(),
-          LocationTwo(),
+        index: globals.currentIndex,
+        children: [
+          WeatherHome(),
+          //LocationTwo(),
         ],
       ),
     );
