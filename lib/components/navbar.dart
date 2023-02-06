@@ -10,6 +10,14 @@ class LocationDrawer extends StatefulWidget {
 }
 
 class _LocationDrawerState extends State<LocationDrawer> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +26,38 @@ class _LocationDrawerState extends State<LocationDrawer> {
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
+            onPressed: () => showDialog<String>(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Enter your location'),
+                content: TextField(
+                  controller: _controller,
+                  onSubmitted: (String value) async {
+                    Navigator.pop(context);
+                    setState(() {
+                      globals.locationlist.add(value);
+                      _controller.clear();
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'City Name',
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'Cancel');
+                      _controller.clear();
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              ),
+            ),
             icon: const Icon(Icons.search),
             tooltip: 'Add new location',
-            onPressed: () {
-              setState(() {
-                globals.locationlist.add('place');
-              });
-            },
           ),
         ],
       ),
@@ -65,7 +98,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
       ),
       body: IndexedStack(
         index: globals.currentIndex,
-        children: [
+        children: const [
           weatherpage.WeatherHome(),
           //LocationTwo(),
         ],
