@@ -35,7 +35,9 @@ class _LocationDrawerState extends State<LocationDrawer> {
                   onSubmitted: (String value) async {
                     Navigator.pop(context);
                     setState(() {
-                      globals.locationlist.add(value);
+                      if (value != '') {
+                        globals.locationlist.add(value);
+                      }
                       _controller.clear();
                     });
                   },
