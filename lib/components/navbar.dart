@@ -98,7 +98,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
       ),
       body: IndexedStack(
         index: globals.currentIndex,
-        children: const [
+        children: [
           weatherpage.WeatherHome(),
           //LocationTwo(),
         ],
