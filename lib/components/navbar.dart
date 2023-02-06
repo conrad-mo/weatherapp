@@ -23,7 +23,6 @@ class _LocationDrawerState extends State<LocationDrawer> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Weather App'),
-        backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
             onPressed: () => showDialog<String>(
@@ -67,9 +66,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
             const SizedBox(
               height: 64.0,
               child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
+                decoration: BoxDecoration(),
                 child: Text('Locations:'),
               ),
             ),
