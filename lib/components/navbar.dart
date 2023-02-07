@@ -22,7 +22,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather App'),
+        title: Text(globals.currentlocation),
         actions: <Widget>[
           IconButton(
             onPressed: () => showDialog<String>(
@@ -47,7 +47,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
                   ),
                 ),
                 actions: <Widget>[
-                  TextButton(
+                  FilledButton(
                     onPressed: () {
                       Navigator.pop(context, 'Cancel');
                       _controller.clear();
@@ -57,7 +57,7 @@ class _LocationDrawerState extends State<LocationDrawer> {
                 ],
               ),
             ),
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.add),
             tooltip: 'Add new location',
           ),
         ],
