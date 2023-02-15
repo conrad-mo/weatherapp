@@ -11,11 +11,21 @@ class _WeatherLabelState extends State<WeatherLabel> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        const Icon(
-          Icons.sunny,
-          size: 24.0,
-          semanticLabel: 'Weather icon',
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [
+            Icon(
+              Icons.sunny,
+              size: 35.0,
+              semanticLabel: 'Weather icon',
+            ),
+            Positioned(
+              bottom: 1,
+              child: Text('Sunny and warm'),
+            ),
+          ],
         ),
         const Spacer(),
         const SizedBox(height: 20),
