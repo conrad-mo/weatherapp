@@ -13,9 +13,9 @@ class _WeatherLabelState extends State<WeatherLabel> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Column(
+        const Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Icon(
               Icons.sunny,
               size: 35.0,
