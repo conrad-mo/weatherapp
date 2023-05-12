@@ -21,7 +21,14 @@ jobs:
         architecture: x64
     - run: |
         flutter clean
+        rm -Rf ios/Pods
+        rm -Rf ios/.symlinks
+        rm -Rf ios/Flutter/Flutter.framework
+        rm -Rf ios/Flutter/Flutter.podspec
         flutter pub get
+        cd ios
+        pod install
+        cd ..
     - run: flutter build ios --release --no-codesign -v
     - run: |
         mkdir /Users/runner/work/weatherapp/weatherapp/build/ios/iphoneos/Payload
