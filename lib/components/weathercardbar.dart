@@ -25,7 +25,10 @@ class _WeatherLabelState extends State<WeatherLabel> {
                 Expanded(
                   child: ListTile(
                     leading: Icon(Icons.device_thermostat),
-                    title: Text('Feels like'),
+                    title: Text(
+                      'Feels like',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     subtitle: Text(
                       '26\u1d52',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -33,9 +36,13 @@ class _WeatherLabelState extends State<WeatherLabel> {
                   ),
                 ),
                 Expanded(
+                  // WRAPPED IN EXPANDED TO PREVENT INFINITE HEIGH ERROR
                   child: ListTile(
                     leading: Icon(Icons.air),
-                    title: Text('Wind'),
+                    title: Text(
+                      'Wind',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     subtitle: Text(
                       '23' ' km/h',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -47,9 +54,13 @@ class _WeatherLabelState extends State<WeatherLabel> {
             Row(
               children: <Widget>[
                 Expanded(
+                  // WRAPPED IN EXPANDED TO PREVENT INFINITE HEIGH ERROR
                   child: ListTile(
                     leading: Icon(Icons.beach_access),
-                    title: Text('Precipitation'),
+                    title: Text(
+                      'Precipitation',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     subtitle: Text(
                       '3' '%',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -59,7 +70,10 @@ class _WeatherLabelState extends State<WeatherLabel> {
                 Expanded(
                   child: ListTile(
                     leading: Icon(Icons.water_drop),
-                    title: Text('Humidity'),
+                    title: Text(
+                      'Humidity',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     subtitle: Text(
                       '95' ' %',
                       style: TextStyle(fontWeight: FontWeight.bold),

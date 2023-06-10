@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/weatherlabel.dart' as wlabel;
+import 'components/weathercardbar.dart' as wcardbar;
+import 'components/weathermain.dart' as wmaincontainer;
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key});
@@ -17,7 +18,15 @@ class _WeatherHomeState extends State<WeatherHome> {
         //margin: EdgeInsets.all(24),
         child: const SafeArea(
           //safearea protects app from notch
-          child: wlabel.WeatherLabel(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              wmaincontainer.WeatherMainContainer(),
+              wcardbar.WeatherLabel()
+            ],
+          ),
         ),
       ),
     );
