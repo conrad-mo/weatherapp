@@ -23,6 +23,7 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
             bottom: 1,
             child: Text('Sunny and warm'),
           ),
+          const Spacer(),
           Align(
             alignment: Alignment.topRight,
             child: RichText(
