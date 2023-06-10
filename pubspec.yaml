@@ -20,7 +20,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true

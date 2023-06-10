@@ -10,44 +10,67 @@ class WeatherLabel extends StatefulWidget {
 class _WeatherLabelState extends State<WeatherLabel> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        const Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.sunny,
-              size: 35.0,
-              semanticLabel: 'Weather icon',
+    return const Center(
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(
+                'Weather now',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-            Positioned(
-              bottom: 1,
-              child: Text('Sunny and warm'),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(Icons.device_thermostat),
+                    title: Text('Feels like'),
+                    subtitle: Text(
+                      '26\u1d52',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(Icons.air),
+                    title: Text('Wind'),
+                    subtitle: Text(
+                      '23' ' km/h',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(Icons.beach_access),
+                    title: Text('Precipitation'),
+                    subtitle: Text(
+                      '3' '%',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(Icons.water_drop),
+                    title: Text('Humidity'),
+                    subtitle: Text(
+                      '95' ' %',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
+              ],
             ),
           ],
         ),
-        const Spacer(),
-        const SizedBox(height: 20),
-        RichText(
-          text: TextSpan(
-            style: DefaultTextStyle.of(context).style,
-            children: const <TextSpan>[
-              TextSpan(
-                  text: '26',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 75.0)),
-              TextSpan(
-                text: '\u1d52',
-                style: TextStyle(
-                  fontSize: 75.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

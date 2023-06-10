@@ -16,6 +16,7 @@ class _WeatherHomeState extends State<WeatherHome> {
         alignment: Alignment.topCenter,
         //margin: EdgeInsets.all(24),
         child: const SafeArea(
+          //safearea protects app from notch
           child: wlabel.WeatherLabel(),
         ),
       ),
