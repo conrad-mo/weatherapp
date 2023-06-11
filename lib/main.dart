@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'components/navbar.dart' as nvbr;
 import 'color_schemes.g.dart' as colorscheme;
+import 'globalvars.dart' as globals;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final citynameProvider = Provider((ref) => 'Markham');
+final citynameProvider = StateProvider((ref) => 'Markham');
+final citylistProvider =
+    StateProvider((ref) => <String>["Markham", "Scarborough"]);
+final countrylistProvider = StateProvider((ref) {
+  return <String>["CA", "CA"];
+});
 void main() {
   runApp(
     const ProviderScope(
@@ -24,7 +30,7 @@ class WeatherApp extends ConsumerWidget {
       darkTheme: ThemeData(
           useMaterial3: true, colorScheme: colorscheme.darkColorScheme),
       themeMode: ThemeMode.system,
-      home: const Scaffold(
+      home: Scaffold(
         body: nvbr.LocationDrawer(),
       ),
     );
