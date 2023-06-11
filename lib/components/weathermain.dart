@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../globalvars.dart' as globals;
 
 class WeatherMainContainer extends StatefulWidget {
   const WeatherMainContainer({super.key});
@@ -11,17 +12,16 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height * 0.4;
-    print(screenheight / 0.4);
     return Align(
         alignment: Alignment.topCenter,
         child: Padding(
           padding: EdgeInsets.only(bottom: screenheight),
           child: Row(
             children: <Widget>[
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(right: 65),
                     child: Icon(
                       Icons.sunny,
@@ -30,8 +30,8 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text('Sunny and warm'),
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(globals.currentlocation),
                   ),
                 ],
               ),

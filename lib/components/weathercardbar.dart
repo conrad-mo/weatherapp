@@ -62,7 +62,7 @@ class _WeatherLabelState extends State<WeatherLabel> {
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '3' '%',
+                      '3' ' mm',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -75,7 +75,7 @@ class _WeatherLabelState extends State<WeatherLabel> {
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '95' ' %',
+                      '95' '%',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),

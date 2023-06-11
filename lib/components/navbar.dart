@@ -35,15 +35,19 @@ class _LocationDrawerState extends State<LocationDrawer> {
                   onSubmitted: (String value) async {
                     Navigator.pop(context);
                     setState(() {
-                      if (value != '') {
-                        globals.locationlist.add(value);
+                      List<String> citylist = value.split(',');
+                      citylist[1] = citylist[1].split(' ')[1];
+                      if (citylist[0] != '' &&
+                          !globals.locationlist.contains(citylist[0])) {
+                        globals.locationlist.add(citylist[0]);
+                        globals.countrylist.add(citylist[1]);
                       }
                       _controller.clear();
                     });
                   },
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'City Name',
+                    hintText: 'City Name, Country Code',
                   ),
                 ),
                 actions: <Widget>[
@@ -82,8 +86,9 @@ class _LocationDrawerState extends State<LocationDrawer> {
                     onTap: () {
                       Navigator.pop(context);
                       setState(() {
-                        //globals.currentIndex = index;
                         globals.currentlocation = globals.locationlist[index];
+                        globals.currentcountry = globals.countrylist[index];
+                        globals.fetchWeather();
                       });
                       // Update the state of the app.
                       // ...
