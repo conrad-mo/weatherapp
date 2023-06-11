@@ -10,20 +10,30 @@ class WeatherMainContainer extends StatefulWidget {
 class _WeatherMainContainerState extends State<WeatherMainContainer> {
   @override
   Widget build(BuildContext context) {
+    double screenheight = MediaQuery.of(context).size.height * 0.4;
+    print(screenheight / 0.4);
     return Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 300),
+          padding: EdgeInsets.only(bottom: screenheight),
           child: Row(
             children: <Widget>[
-              const Icon(
-                Icons.sunny,
-                size: 35.0,
-                semanticLabel: 'Weather icon',
-              ),
-              const Positioned(
-                bottom: 1,
-                child: Text('Sunny and warm'),
+              const Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: 65),
+                    child: Icon(
+                      Icons.sunny,
+                      size: 35.0,
+                      semanticLabel: 'Weather icon',
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text('Sunny and warm'),
+                  ),
+                ],
               ),
               const Spacer(),
               Align(
