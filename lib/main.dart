@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'components/navbar.dart' as nvbr;
 import 'color_schemes.g.dart' as colorscheme;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final citynameProvider = Provider((ref) => 'Markham');
 void main() {
-  runApp(const WeatherApp());
+  runApp(
+    const ProviderScope(
+      child: WeatherApp(),
+    ),
+  );
 }
 
-class WeatherApp extends StatefulWidget {
+class WeatherApp extends ConsumerWidget {
   const WeatherApp({super.key});
 
   @override
-  State<WeatherApp> createState() => _WeatherAppState();
-}
-
-class _WeatherAppState extends State<WeatherApp> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Weather App',
       theme: ThemeData(
