@@ -10,6 +10,7 @@ class LocationDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> citylist = ref.watch(citylistProvider);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(ref.watch(citynameProvider)),
         actions: <Widget>[

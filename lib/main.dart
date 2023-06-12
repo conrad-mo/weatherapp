@@ -50,6 +50,7 @@ class WeatherApp extends ConsumerWidget {
           useMaterial3: true, colorScheme: colorscheme.darkColorScheme),
       themeMode: ThemeMode.system,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: nvbr.LocationDrawer(),
       ),
     );
