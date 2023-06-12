@@ -7,6 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class LocationDrawer extends ConsumerWidget {
   final _controller = TextEditingController();
 
+  LocationDrawer({super.key});
+
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> citylist = ref.watch(citylistProvider);
     return Scaffold(

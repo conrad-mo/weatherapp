@@ -29,6 +29,9 @@ final humidityProvider = StateProvider<int>((ref) {
 final rainProvider = StateProvider<int>((ref) {
   return 0;
 });
+final fourofourProvider = StateProvider<bool>((ref) {
+  return true;
+});
 void main() {
   runApp(
     const ProviderScope(

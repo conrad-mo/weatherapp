@@ -3,6 +3,8 @@ import '../main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WeatherLabel extends ConsumerWidget {
+  const WeatherLabel({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final feelslike = ref.watch(feelslikeProvider);
