@@ -16,7 +16,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       body: Container(
         alignment: Alignment.topCenter,
         //margin: EdgeInsets.all(24),
-        child: const SafeArea(
+        child: SafeArea(
           //safearea protects app from notch
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components/navbar.dart' as nvbr;
 import 'color_schemes.g.dart' as colorscheme;
-import 'globalvars.dart' as globals;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final citynameProvider = StateProvider((ref) => 'Markham');
@@ -9,6 +8,27 @@ final citylistProvider =
     StateProvider((ref) => <String>["Markham", "Scarborough"]);
 final countrylistProvider = StateProvider((ref) {
   return <String>["CA", "CA"];
+});
+final countrynameProvider = StateProvider<String>((ref) {
+  return "CA";
+});
+final weathertempProvider = StateProvider<int>((ref) {
+  return 0;
+});
+final feelslikeProvider = StateProvider<int>((ref) {
+  return 0;
+});
+final windspeedProvider = StateProvider<int>((ref) {
+  return 0;
+});
+final descriptionProvider = StateProvider<String>((ref) {
+  return "";
+});
+final humidityProvider = StateProvider<int>((ref) {
+  return 0;
+});
+final rainProvider = StateProvider<int>((ref) {
+  return 0;
 });
 void main() {
   runApp(

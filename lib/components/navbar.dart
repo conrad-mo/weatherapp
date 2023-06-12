@@ -78,7 +78,7 @@ class LocationDrawer extends ConsumerWidget {
                       Navigator.pop(context);
                       globals.currentlocation = globals.locationlist[index];
                       globals.currentcountry = globals.countrylist[index];
-                      globals.fetchWeather();
+                      globals.fetchWeather(ref);
                       ref.read(citynameProvider.notifier).state =
                           globals.currentlocation;
 
