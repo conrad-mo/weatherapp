@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
 import '../globalvars.dart' as globals;
+import '../main.dart';
 import '../weatherpage.dart' as weatherpage;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationDrawer extends StatefulWidget {
-  const LocationDrawer({super.key});
+class LocationDrawer extends ConsumerWidget {
+  final _controller = TextEditingController();
 
-  @override
-  State<LocationDrawer> createState() => _LocationDrawerState();
-}
-
-class _LocationDrawerState extends State<LocationDrawer> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<String> citylist = ref.watch(citylistProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(globals.currentlocation),
+        title: Text(ref.watch(citynameProvider)),
         actions: <Widget>[
           IconButton(
             onPressed: () => showDialog<String>(
@@ -33,8 +22,8 @@ class _LocationDrawerState extends State<LocationDrawer> {
                 content: TextField(
                   controller: _controller,
                   onSubmitted: (String value) async {
-                    Navigator.pop(context);
-                    setState(() {
+                    if (value.contains(',') && value.contains(' ')) {
+                      Navigator.pop(context);
                       List<String> citylist = value.split(',');
                       citylist[1] = citylist[1].split(' ')[1];
                       if (citylist[0] != '' &&
@@ -42,8 +31,21 @@ class _LocationDrawerState extends State<LocationDrawer> {
                         globals.locationlist.add(citylist[0]);
                         globals.countrylist.add(citylist[1]);
                       }
+                      ref.read(citylistProvider.notifier).state =
+                          globals.locationlist.toList();
+                      ref.read(countrylistProvider.notifier).state =
+                          globals.countrylist.toList();
+                      globals.currentlocation = citylist[0];
+                      globals.currentcountry = citylist[1];
+                      globals.fetchWeather(ref);
+                      ref.read(citynameProvider.notifier).state =
+                          globals.currentlocation;
+                      ref.read(countrynameProvider.notifier).state =
+                          globals.currentcountry;
                       _controller.clear();
-                    });
+                    } else {
+                      const Text("Invalid format used");
+                    }
                   },
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -79,17 +81,19 @@ class _LocationDrawerState extends State<LocationDrawer> {
             SizedBox(
               height: double.maxFinite,
               child: ListView.builder(
-                itemCount: globals.locationlist.length,
+                itemCount: citylist.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(globals.locationlist[index]),
+                    title: Text(ref.watch(citylistProvider)[index]),
                     onTap: () {
                       Navigator.pop(context);
-                      setState(() {
-                        globals.currentlocation = globals.locationlist[index];
-                        globals.currentcountry = globals.countrylist[index];
-                        globals.fetchWeather();
-                      });
+                      globals.currentlocation = globals.locationlist[index];
+                      globals.currentcountry = globals.countrylist[index];
+                      globals.fetchWeather(ref);
+                      ref.read(citynameProvider.notifier).state =
+                          globals.currentlocation;
+                      ref.read(countrynameProvider.notifier).state =
+                          globals.currentcountry;
                       // Update the state of the app.
                       // ...
                     },

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import '../globalvars.dart' as globals;
+import '../main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WeatherMainContainer extends StatefulWidget {
-  const WeatherMainContainer({super.key});
-
+class WeatherMainContainer extends ConsumerWidget {
   @override
-  State<WeatherMainContainer> createState() => _WeatherMainContainerState();
-}
-
-class _WeatherMainContainerState extends State<WeatherMainContainer> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final description = ref.watch(descriptionProvider);
+    final temperature = ref.watch(weathertempProvider);
     double screenheight = MediaQuery.of(context).size.height * 0.4;
     return Align(
         alignment: Alignment.topCenter,
@@ -18,21 +14,19 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
           padding: EdgeInsets.only(bottom: screenheight),
           child: Row(
             children: <Widget>[
+              const SizedBox(
+                width: 15,
+              ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(right: 65),
-                    child: Icon(
-                      Icons.sunny,
-                      size: 35.0,
-                      semanticLabel: 'Weather icon',
-                    ),
+                  const Icon(
+                    Icons.sunny,
+                    size: 35.0,
+                    semanticLabel: 'Weather icon',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(globals.currentlocation),
-                  ),
+                  Text(description),
                 ],
               ),
               const Spacer(),
@@ -41,12 +35,12 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
                 child: RichText(
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
-                          text: '26',
-                          style: TextStyle(
+                          text: temperature.toString(),
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 75.0)),
-                      TextSpan(
+                      const TextSpan(
                         text: '\u1d52',
                         style: TextStyle(
                           fontSize: 75.0,
@@ -56,6 +50,9 @@ class _WeatherMainContainerState extends State<WeatherMainContainer> {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                width: 15,
               ),
             ],
           ),

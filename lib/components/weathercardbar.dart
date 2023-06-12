@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import '../main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WeatherLabel extends StatefulWidget {
-  const WeatherLabel({super.key});
-
+class WeatherLabel extends ConsumerWidget {
   @override
-  State<WeatherLabel> createState() => _WeatherLabelState();
-}
-
-class _WeatherLabelState extends State<WeatherLabel> {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final feelslike = ref.watch(feelslikeProvider);
+    final wind = ref.watch(windspeedProvider);
+    final rain = ref.watch(rainProvider);
+    final humidity = ref.watch(humidityProvider);
+    return Center(
       child: Card(
         child: Column(
           children: <Widget>[
-            ListTile(
+            const ListTile(
               title: Text(
                 'Weather now',
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -24,28 +23,28 @@ class _WeatherLabelState extends State<WeatherLabel> {
               children: <Widget>[
                 Expanded(
                   child: ListTile(
-                    leading: Icon(Icons.device_thermostat),
-                    title: Text(
+                    leading: const Icon(Icons.device_thermostat),
+                    title: const Text(
                       'Feels like',
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '26\u1d52',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      '$feelslike\u1d52',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 Expanded(
-                  // WRAPPED IN EXPANDED TO PREVENT INFINITE HEIGH ERROR
+                  // WRAPPED IN EXPANDED TO PREVENT INFINITE HEIGHT ERROR
                   child: ListTile(
-                    leading: Icon(Icons.air),
-                    title: Text(
+                    leading: const Icon(Icons.air),
+                    title: const Text(
                       'Wind',
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '23' ' km/h',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      '$wind km/h',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 )
@@ -56,27 +55,27 @@ class _WeatherLabelState extends State<WeatherLabel> {
                 Expanded(
                   // WRAPPED IN EXPANDED TO PREVENT INFINITE HEIGH ERROR
                   child: ListTile(
-                    leading: Icon(Icons.beach_access),
-                    title: Text(
+                    leading: const Icon(Icons.beach_access),
+                    title: const Text(
                       'Precipitation',
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '3' ' mm',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      '$rain mm',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
-                    leading: Icon(Icons.water_drop),
-                    title: Text(
+                    leading: const Icon(Icons.water_drop),
+                    title: const Text(
                       'Humidity',
                       style: TextStyle(fontSize: 15),
                     ),
                     subtitle: Text(
-                      '95' '%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      '$humidity%',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 )
