@@ -14,21 +14,19 @@ class WeatherMainContainer extends ConsumerWidget {
           padding: EdgeInsets.only(bottom: screenheight),
           child: Row(
             children: <Widget>[
+              const SizedBox(
+                width: 15,
+              ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(right: 50),
-                    child: Icon(
-                      Icons.sunny,
-                      size: 35.0,
-                      semanticLabel: 'Weather icon',
-                    ),
+                  const Icon(
+                    Icons.sunny,
+                    size: 35.0,
+                    semanticLabel: 'Weather icon',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(description),
-                  ),
+                  Text(description),
                 ],
               ),
               const Spacer(),
@@ -52,6 +50,9 @@ class WeatherMainContainer extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                width: 15,
               ),
             ],
           ),
