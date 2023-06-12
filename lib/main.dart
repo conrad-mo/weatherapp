@@ -3,14 +3,13 @@ import 'components/navbar.dart' as nvbr;
 import 'color_schemes.g.dart' as colorscheme;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final citynameProvider = StateProvider((ref) => 'Markham');
-final citylistProvider =
-    StateProvider((ref) => <String>["Markham", "Scarborough"]);
+final citynameProvider = StateProvider((ref) => '');
+final citylistProvider = StateProvider((ref) => <String>[]);
 final countrylistProvider = StateProvider((ref) {
-  return <String>["CA", "CA"];
+  return <String>[];
 });
 final countrynameProvider = StateProvider<String>((ref) {
-  return "CA";
+  return "";
 });
 final weathertempProvider = StateProvider<int>((ref) {
   return 0;

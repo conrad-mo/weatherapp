@@ -22,19 +22,30 @@ class LocationDrawer extends ConsumerWidget {
                 content: TextField(
                   controller: _controller,
                   onSubmitted: (String value) async {
-                    Navigator.pop(context);
-                    List<String> citylist = value.split(',');
-                    citylist[1] = citylist[1].split(' ')[1];
-                    if (citylist[0] != '' &&
-                        !globals.locationlist.contains(citylist[0])) {
-                      globals.locationlist.add(citylist[0]);
-                      globals.countrylist.add(citylist[1]);
+                    if (value.contains(',') && value.contains(' ')) {
+                      Navigator.pop(context);
+                      List<String> citylist = value.split(',');
+                      citylist[1] = citylist[1].split(' ')[1];
+                      if (citylist[0] != '' &&
+                          !globals.locationlist.contains(citylist[0])) {
+                        globals.locationlist.add(citylist[0]);
+                        globals.countrylist.add(citylist[1]);
+                      }
+                      ref.read(citylistProvider.notifier).state =
+                          globals.locationlist.toList();
+                      ref.read(countrylistProvider.notifier).state =
+                          globals.countrylist.toList();
+                      globals.currentlocation = citylist[0];
+                      globals.currentcountry = citylist[1];
+                      globals.fetchWeather(ref);
+                      ref.read(citynameProvider.notifier).state =
+                          globals.currentlocation;
+                      ref.read(countrynameProvider.notifier).state =
+                          globals.currentcountry;
+                      _controller.clear();
+                    } else {
+                      const Text("Invalid format used");
                     }
-                    ref.read(citylistProvider.notifier).state =
-                        globals.locationlist.toList();
-                    ref.read(countrylistProvider.notifier).state =
-                        globals.countrylist.toList();
-                    _controller.clear();
                   },
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -81,7 +92,8 @@ class LocationDrawer extends ConsumerWidget {
                       globals.fetchWeather(ref);
                       ref.read(citynameProvider.notifier).state =
                           globals.currentlocation;
-
+                      ref.read(countrynameProvider.notifier).state =
+                          globals.currentcountry;
                       // Update the state of the app.
                       // ...
                     },
