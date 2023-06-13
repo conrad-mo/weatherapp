@@ -22,7 +22,6 @@ void fetchWeather(WidgetRef ref) async {
     final httpPackageInfo = await http.read(httpPackageUrl);
     final httpPackageJson =
         json.decode(httpPackageInfo) as Map<String, dynamic>;
-    print(httpPackageJson);
     if (!httpPackageJson.containsKey("message") || response.statusCode != 404) {
       ref.read(fourofourProvider.notifier).state = false;
       ref.read(weathertempProvider.notifier).state =
@@ -33,10 +32,19 @@ void fetchWeather(WidgetRef ref) async {
           (httpPackageJson["wind"]["speed"] * 3.6).round();
       ref.read(descriptionProvider.notifier).state =
           (httpPackageJson["weather"][0]["description"]);
-      ref.read(humidityProvider.notifier).state =
-          (httpPackageJson["main"]["humidity"]);
-      ref.read(countrynameProvider.notifier).state =
-          httpPackageJson["sys"]["country"];
+      if (httpPackageJson["weather"][0]["description"].contains("sun")) {
+        ref.read(iconindexProvider.notifier).state = 0;
+      } else if (httpPackageJson["weather"][0]["description"]
+              .contains("cloud") ||
+          httpPackageJson["weather"][0]["description"].contains("clear")) {
+        ref.read(iconindexProvider.notifier).state = 1;
+      } else if (["rain", "drizzle", "thunder", "storm", "mist"]
+          .any(httpPackageJson["weather"][0]["description"].contains)) {
+        ref.read(iconindexProvider.notifier).state = 2;
+      } else if (httpPackageJson["weather"][0]["description"]
+          .contains("snow")) {
+        ref.read(iconindexProvider.notifier).state = 3;
+      }
       if (httpPackageJson.containsKey("rain")) {
         ref.read(rainProvider.notifier).state =
             (httpPackageJson["rain"]["1h"]).round();

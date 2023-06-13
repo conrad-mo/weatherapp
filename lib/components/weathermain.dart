@@ -10,6 +10,8 @@ class WeatherMainContainer extends ConsumerWidget {
     final description = ref.watch(descriptionProvider);
     final temperature = ref.watch(weathertempProvider);
     final fourofour = ref.watch(fourofourProvider);
+    final iconindex = ref.watch(iconindexProvider);
+    final iconlist = ref.watch(iconProvider);
     double screenheight = MediaQuery.of(context).size.height * 0.4;
     return Align(
       alignment: Alignment.topCenter,
@@ -36,11 +38,29 @@ class WeatherMainContainer extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        const Icon(
-                          Icons.sunny,
-                          size: 35.0,
-                          semanticLabel: 'Weather icon',
-                        ),
+                        iconindex == 0
+                            ? const Icon(
+                                Icons.sunny,
+                                size: 35.0,
+                                semanticLabel: 'Weather icon',
+                              )
+                            : (iconindex == 1)
+                                ? const Icon(
+                                    Icons.cloud,
+                                    size: 35.0,
+                                    semanticLabel: 'Weather icon',
+                                  )
+                                : (iconindex == 2)
+                                    ? const Icon(
+                                        Icons.thunderstorm,
+                                        size: 35.0,
+                                        semanticLabel: 'Weather icon',
+                                      )
+                                    : const Icon(
+                                        Icons.cloudy_snowing,
+                                        size: 35.0,
+                                        semanticLabel: 'Weather icon',
+                                      ),
                         Text(description),
                       ],
                     ),
