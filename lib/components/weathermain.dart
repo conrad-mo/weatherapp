@@ -11,7 +11,6 @@ class WeatherMainContainer extends ConsumerWidget {
     final temperature = ref.watch(weathertempProvider);
     final fourofour = ref.watch(fourofourProvider);
     final iconindex = ref.watch(iconindexProvider);
-    final iconlist = ref.watch(iconProvider);
     double screenheight = MediaQuery.of(context).size.height * 0.4;
     return Align(
       alignment: Alignment.topCenter,

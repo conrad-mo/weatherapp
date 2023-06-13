@@ -32,9 +32,6 @@ final rainProvider = StateProvider<int>((ref) {
 final fourofourProvider = StateProvider<bool>((ref) {
   return true;
 });
-final iconProvider = StateProvider<List<String>>((ref) {
-  return ["sunny", "cloud", "thunderstorm", "cloudy_snowing"];
-});
 final iconindexProvider = StateProvider<int>((ref) {
   return 0;
 });
