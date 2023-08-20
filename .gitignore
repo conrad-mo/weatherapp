@@ -33,7 +33,6 @@ migrate_working_dir/
 /build/
 linux/
 macos/
-web/
 windows/
 
 # Symbolication related
